@@ -3,7 +3,7 @@ package com.lonkachu.stackable.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.lonkachu.stackable.StackableMod;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import net.minecraft.server.commands.ItemCommands;
+import net.minecraft.server.commands.item.ItemCommands;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -18,7 +18,7 @@ something, but what it does is unclear.
 public class ItemCommandsFixin
 {
     @ModifyExpressionValue(
-            method = "register(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/commands/CommandBuildContext;)V",
+            method = "lambda$wrapSetItems$0",
             at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/arguments/IntegerArgumentType;integer(II)Lcom/mojang/brigadier/arguments/IntegerArgumentType;")
     )
     private static IntegerArgumentType ReplaceIntegerArgType(IntegerArgumentType orginal)

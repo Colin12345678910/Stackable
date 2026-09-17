@@ -29,10 +29,9 @@ public class Stackable {
     {
         try
         {
-            //TODO: This function is deprecated
             event.modifyMatching(
                     (item, components)  -> !item.isDamageable(item.getDefaultInstance()) && item.getDefaultMaxStackSize() == 64, //Basically, we want to ignore any damagable item, and also ensure the object has the default stack size.
-                    (patch) -> patch.set(DataComponents.MAX_STACK_SIZE, StackableMod.getMaxStackCount())
+                    (builder,provider,item) -> builder.set(DataComponents.MAX_STACK_SIZE, StackableMod.getMaxStackCount())
             );
         } catch (IllegalStateException e){
             throw new RuntimeException(e);
@@ -43,7 +42,7 @@ public class Stackable {
             try
             {
                 Item item = BuiltInRegistries.ITEM.get(override.GetIdentifier()).orElseThrow().value();
-                event.modify(item, builder -> builder.set(DataComponents.MAX_STACK_SIZE, override.GetCount()));
+                event.modify(item, (builder,provider,i) -> builder.set(DataComponents.MAX_STACK_SIZE, override.GetCount()));
             } catch (NoSuchElementException e)
             {
                 StackableMod.LOGGER.error("No such block exists with the key " + override.GetIdentifier() + " skipping stack size modification!!!");
