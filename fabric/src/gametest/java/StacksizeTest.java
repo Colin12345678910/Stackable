@@ -44,7 +44,7 @@ public class StacksizeTest implements CustomTestMethodInvoker {
     {
         var itemStack = new ItemStack(Items.BUNDLE);
 
-        BundleContents.Mutable builder = new BundleContents.Mutable(BundleContents.EMPTY);
+        BundleContents.Mutable builder = new BundleContents.Mutable();
 
         for (int i = 0; i < StackableMod.getMaxStackCount() / StackableMod.GetConfig().getBundleStackPenalty(); i++)
         {
